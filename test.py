@@ -7,11 +7,11 @@ import numpy as np
 import torch
 import RRDBNet_arch as arch
 
-model_path = '/content/ESRGAN/models/RRDB_ESRGAN_x4.pth'  # models/RRDB_ESRGAN_x4.pth OR models/RRDB_PSNR_x4.pth
+model_path = 'models/RRDB_ESRGAN_x4.pth'  # models/RRDB_ESRGAN_x4.pth OR models/RRDB_PSNR_x4.pth
 device = torch.device('cpu')  # if you want to run on CPU, change 'cuda' -> cpu
 # device = torch.device('cpu')
 
-test_img_folder = '/content/ESRGAN/LR/*'
+test_img_folder = 'ESRGAN/LR/*'
 
 model = arch.RRDBNet(3, 3, 64, 23, gc=32)
 model.load_state_dict(torch.load(model_path), strict=True)
@@ -38,4 +38,4 @@ for path in glob.glob(test_img_folder):
     output = np.uint8((output * 255.0).round())
     print(type(output))
     output = Image.fromarray(output)
-    output.save('/content/ESRGAN/results/{:s}_rlt.png'.format(base))
+    output.save('results/{:s}_rlt.png'.format(base))
