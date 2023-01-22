@@ -11,7 +11,7 @@ model_path = 'models/RRDB_ESRGAN_x4.pth'  # models/RRDB_ESRGAN_x4.pth OR models/
 device = torch.device('cpu')  # if you want to run on CPU, change 'cuda' -> cpu
 # device = torch.device('cpu')
 
-test_img_folder = 'ESRGAN/LR/*'
+test_img_folder = 'LR/*'
 
 model = arch.RRDBNet(3, 3, 64, 23, gc=32)
 model.load_state_dict(torch.load(model_path), strict=True)
@@ -22,6 +22,7 @@ print('Model path {:s}. \nTesting...'.format(model_path))
 
 idx = 0
 for path in glob.glob(test_img_folder):
+    
     idx += 1
     base = osp.splitext(osp.basename(path))[0]
     print(idx, base)
